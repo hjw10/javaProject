@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>删除待定基因</title>
+</head>
+<body>
+<%
+        try{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String url="jdbc:mysql://localhost:3306/lab2";
+		String user="root";
+		String pwd="030307";
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		conn=DriverManager.getConnection(url,user,pwd);
+			
+		String sql = "delete from gene55 "
+				+ "where gene_id = "
+				+ request.getParameter("gene_id"); 
+		stmt = conn.prepareStatement(sql);
+		stmt.executeUpdate();
+		 %>	
+		         <p>Congratulations. It works!</p>
+        
+        <%}
+		catch (Exception ex){
+		%>
+		<%="Error:" + ex.toString()%>
+		<%} %>
+
+</body>
+</html>
